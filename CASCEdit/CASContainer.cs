@@ -509,6 +509,19 @@ namespace CASCEdit
                 return false;
             }
 
+            // Patch Config
+            string patchKey = BuildConfig.GetKey("patch-config");
+            string patchCfgLocalPath = Path.Combine(BasePath, "Data", "config", patchKey.Substring(0, 2), patchKey.Substring(2, 2), patchKey);
+            if (File.Exists(patchCfgLocalPath))
+            {
+                File.Copy(patchCfgLocalPath, Path.Combine(savepath, patchKey), true);
+            }
+            else
+            {
+                Logger.LogCritical("Patch Config missing.");
+                return false;
+            }
+
 
             string path;
 
